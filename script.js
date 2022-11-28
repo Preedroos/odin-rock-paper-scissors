@@ -1,50 +1,45 @@
 function getComputerChoice() {
-  return Math.trunc(Math.random() * 3);
-}
-
-function getPlayerChoice() {
-  let option;
-  do {
-    option = prompt('Rock or Paper or Scissors').toLowerCase();
-  } while (!options.includes(option));
-  return options.findIndex(value => value.toLowerCase() === option);
+  const options = ['Rock', 'Paper', 'Scissors'];
+  const option = Math.trunc(Math.random() * 3);
+  return options[option];
 }
 
 function playRound(playerSelection, computerSelection) {
   if (playerSelection === computerSelection) {
-    alert("That's a tie");
-    return 'tie';
+    return "That's a tie";
   } else if (
-    (playerSelection === 0 && computerSelection === 2) ||
-    (playerSelection === 2 && computerSelection === 1) ||
-    (playerSelection === 1 && computerSelection === 0)
+    (playerSelection === 'Rock' && computerSelection === 'Scissors') ||
+    (playerSelection === 'Scissors' && computerSelection === 'Paper') ||
+    (playerSelection === 'Paper' && computerSelection === 'Rock')
   ) {
-    alert(
-      `You've Won! ${options[playerSelection]} beats ${options[computerSelection]}`
-    );
-    return 'player';
+    return `You've Won! ${playerSelection} beats ${computerSelection}`;
   } else {
-    alert(
-      `You've Lose! ${options[computerSelection]} beats ${options[playerSelection]}`
-    );
-    return 'computer';
+    return `You've Lose! ${computerSelection} beats ${playerSelection}`;
   }
 }
 
-function game(rounds = 1) {
-  if (rounds > 1) game(rounds - 1);
-  results.push(playRound(getPlayerChoice(), getComputerChoice()));
+function showResult(resultMsg) {
+  const resultContainer = document.querySelector('#result');
+  resultContainer.textContent = resultMsg;
+}
 
-  if (rounds === 5) {
-    alert(
-      `Player: ${
-        results.filter(value => value === 'player').length
-      }  Computer: ${results.filter(value => value === 'computer').length}`
-    );
+function sumPoint(resultMsg) {
+  if (resultMsg.includes('Won')) {
+    let point = Number(document.querySelector('#player').textContent);
+    point += 1;
+    document.querySelector('#player').textContent = point;
+  } else if (resultMsg.includes('Lose')) {
+    let point = Number(document.querySelector('#computer').textContent);
+    point += 1;
+    document.querySelector('#computer').textContent = point;
   }
 }
 
-const options = ['rock', 'paper', 'scissors'];
-const results = [];
-
-game(5);
+const buttons = document.querySelectorAll('button');
+buttons.forEach(button => {
+  button.addEventListener('click', () => {
+    const resultMsg = playRound(button.textContent, getComputerChoice());
+    showResult(resultMsg);
+    sumPoint(resultMsg);
+  });
+});
