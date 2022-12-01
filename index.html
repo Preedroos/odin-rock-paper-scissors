@@ -5,28 +5,37 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rock Paper Scissors</title>
+    <link rel="stylesheet" href="style.css" />
     <script src="script.js" defer></script>
   </head>
   <body>
-    <div id="options">
-      <button>Rock</button>
-      <button>Paper</button>
-      <button>Scissors</button>
+    <div id="status">
+      Status
     </div>
-    <div id="result"></div>
-    <table id="points">
-      <thead>
-        <tr>
-          <th>Player</th>
-          <th>Computer</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td id="player">0</td>
-          <td id="computer">0</td>
-        </tr>
-      </tbody>
-    </table>
+
+    <section class="middle">
+      <div class="point">
+        <span id="player">0</span>
+      </div>
+
+      <div id="options">
+        <div id="rockWrapper">
+          <img class="option" id="pseudo" />
+          <img class="option" id="rock" src="public/images/rock.png" />
+        </div>
+        <div id="paperWrapper">
+          <img class="option" id="pseudo" />
+          <img class="option" id="paper" src="public/images/paper.png" />
+        </div>
+        <div id="scissorsWrapper">
+          <img class="option" id="pseudo" />
+          <img class="option" id="scissors" src="public/images/scissors.png" />
+        </div>
+      </div>
+
+      <div class="point">
+        <span id="computer">0</span>
+      </div>
+    </section>
   </body>
 </html>
