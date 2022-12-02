@@ -9,30 +9,46 @@
     <script src="script.js" defer></script>
   </head>
   <body>
-    <div id="status" class="hidden"></div>
-
     <section class="middle">
-      <div class="point">
-        <span id="player">0</span>
+      <div class="score">
+        <p>YOU</p>
+        <div class="score-bg">
+          <span id="player">0</span>
+        </div>
       </div>
 
       <div id="options">
         <div id="rockWrapper">
           <img class="option" id="pseudo" />
-          <img class="option" id="rock" src="public/images/rock.png" />
+          <img
+            class="option"
+            id="rock"
+            src="public/images/rock/rock-yellow.png"
+          />
         </div>
         <div id="paperWrapper">
           <img class="option" id="pseudo" />
-          <img class="option" id="paper" src="public/images/paper.png" />
+          <img
+            class="option"
+            id="paper"
+            src="public/images/paper/paper-yellow.png"
+          />
         </div>
         <div id="scissorsWrapper">
           <img class="option" id="pseudo" />
-          <img class="option" id="scissors" src="public/images/scissors.png" />
+          <img
+            class="option"
+            id="scissors"
+            src="public/images/scissors/scissors-yellow.png"
+          />
         </div>
       </div>
 
-      <div class="point">
-        <span id="computer">0</span>
+      <div class="score">
+        <p>PC</p>
+        <div class="score-bg">
+          <span id="computer">0</span>
+        </div>
       </div>
     </section>
   </body>

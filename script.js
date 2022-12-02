@@ -7,14 +7,11 @@ function getComputerChoice() {
 function playRound(playerSelection, computerSelection) {
   if (playerSelection === computerSelection) {
     shake(playerSelection);
-    setStatus('tie');
   } else if (playerWinCondition(playerSelection, computerSelection)) {
-    setStatus('player');
-    updateWinnerPoints('player');
+    points = updateWinnerPoints('player');
     down(playerSelection, computerSelection);
   } else {
-    setStatus('computer');
-    updateWinnerPoints('computer');
+    points = updateWinnerPoints('computer');
     up(playerSelection, computerSelection);
   }
 }
@@ -25,23 +22,6 @@ function playerWinCondition(p, c) {
     (p === 'scissors' && c === 'paper') ||
     (p === 'paper' && c === 'rock')
   );
-}
-
-function setStatus(winner) {
-  const status = document.querySelector('#status');
-  if (winner === 'player') {
-    status.className = 'won';
-    status.textContent = 'You won!';
-  } else if (winner === 'computer') {
-    status.className = 'lost';
-    status.textContent = 'You lost!';
-  } else {
-    status.className = 'tie';
-    status.textContent = "That's a tie!";
-  }
-  setTimeout(() => {
-    status.className = 'hidden';
-  }, animeDuration);
 }
 
 // Use when it's a tie
@@ -55,12 +35,13 @@ function shake(id) {
 
 // Use when computer wins
 function up(playerId, computerId) {
-  const pseudo = updatePseudoImg(playerId, computerId);
+  const pseudo = updatePseudoImg(playerId, computerId, computerId);
   pseudo.animate(
     [
       { transform: 'translateY(0)' },
       { transform: 'translateY(-110%)' },
       { transform: 'translateY(0)' },
+      { opacity: '0.9' },
     ],
     { duration: animeDuration, iterations: 1 }
   );
@@ -68,22 +49,27 @@ function up(playerId, computerId) {
 
 // Use when computer loses
 function down(playerId, computerId) {
-  const pseudo = updatePseudoImg(playerId, computerId);
+  const pseudo = updatePseudoImg(playerId, computerId, playerId);
   pseudo.animate(
     [
       { transform: 'translateY(0)' },
       { transform: 'translateY(110%)' },
       { transform: 'translateY(0)' },
+      { opacity: '0.9' },
     ],
     { duration: animeDuration, iterations: 1 }
   );
 }
 
 // Update pseudo image url
-function updatePseudoImg(playerId, computerId) {
+function updatePseudoImg(playerId, computerId, winnerId) {
   const pseudo = document.querySelector(`#${playerId}Wrapper #pseudo`);
   const computer = document.querySelector(`#${computerId}`);
-  pseudo.src = computer.src;
+  if (winnerId === playerId) {
+    pseudo.src = computer.src.replace('yellow', 'green');
+  } else {
+    pseudo.src = computer.src.replace('yellow', 'red');
+  }
   return pseudo;
 }
 
@@ -91,11 +77,29 @@ function updatePseudoImg(playerId, computerId) {
 function updateWinnerPoints(winnerId) {
   const winner = document.querySelector(`#${winnerId}`);
   winner.textContent = Number(winner.textContent) + 1;
+  hint(winner);
+  return winner.textContent;
 }
 
-const options = document.querySelectorAll('.option');
-const animeDuration = 2000;
+// Highlists winner points after round
+function hint(winner) {
+  winner.animate(
+    [
+      { transform: 'scale(1.1)' },
+      { transform: 'scale(1.5)' },
+      { transform: 'scale(1)' },
+    ],
+    {
+      duration: animeDuration,
+      iterations: 1,
+    }
+  );
+}
 
+const animeDuration = 2000;
+const limit = 5;
+
+const options = document.querySelectorAll('.option');
 options.forEach(option => {
   option.addEventListener('click', () => {
     playRound(option.id, getComputerChoice());
