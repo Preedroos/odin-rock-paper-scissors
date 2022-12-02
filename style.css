@@ -13,7 +13,6 @@ body {
 #status {
   width: 600px;
   height: 50px;
-  background-color: white;
   border-radius: 5px;
   display: flex;
   justify-content: center;
@@ -22,7 +21,26 @@ body {
   margin-top: 50px;
   font-weight: 700;
   font-size: 20px;
+  transition: 200ms;
+}
+
+.hidden {
+  opacity: 0;
+}
+
+.won {
+  background-color: green;
   color: white;
+}
+
+.lost {
+  background-color: red;
+  color: white;
+}
+
+.tie {
+  background-color: #ffea00;
+  color: black;
 }
 
 .middle {

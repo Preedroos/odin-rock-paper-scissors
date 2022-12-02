@@ -30,18 +30,18 @@ function playerWinCondition(p, c) {
 function setStatus(winner) {
   const status = document.querySelector('#status');
   if (winner === 'player') {
-    status.textContent = "You've won";
-    status.style.backgroundColor = 'green';
-    status.style.color = 'white';
+    status.className = 'won';
+    status.textContent = 'You won!';
   } else if (winner === 'computer') {
-    status.textContent = "You've lost";
-    status.style.backgroundColor = 'red';
-    status.style.color = 'white';
+    status.className = 'lost';
+    status.textContent = 'You lost!';
   } else {
-    status.textContent = "That's a tie";
-    status.style.backgroundColor = '#ffea00';
-    status.style.color = 'black';
+    status.className = 'tie';
+    status.textContent = "That's a tie!";
   }
+  setTimeout(() => {
+    status.className = 'hidden';
+  }, animeDuration);
 }
 
 // Use when it's a tie
@@ -62,7 +62,7 @@ function up(playerId, computerId) {
       { transform: 'translateY(-110%)' },
       { transform: 'translateY(0)' },
     ],
-    { duration: 2000, iterations: 1 }
+    { duration: animeDuration, iterations: 1 }
   );
 }
 
@@ -75,7 +75,7 @@ function down(playerId, computerId) {
       { transform: 'translateY(110%)' },
       { transform: 'translateY(0)' },
     ],
-    { duration: 2000, iterations: 1 }
+    { duration: animeDuration, iterations: 1 }
   );
 }
 
@@ -94,9 +94,10 @@ function updateWinnerPoints(winnerId) {
 }
 
 const options = document.querySelectorAll('.option');
+const animeDuration = 2000;
 
 options.forEach(option => {
-  option.addEventListener('click', () =>
-    playRound(option.id, getComputerChoice())
-  );
+  option.addEventListener('click', () => {
+    playRound(option.id, getComputerChoice());
+  });
 });
