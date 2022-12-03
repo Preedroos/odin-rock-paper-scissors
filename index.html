@@ -9,7 +9,7 @@
     <script src="script.js" defer></script>
   </head>
   <body>
-    <section class="middle">
+    <main class="middle">
       <div class="score">
         <p>YOU</p>
         <div class="score-bg">
@@ -19,25 +19,43 @@
 
       <div id="options">
         <div id="rockWrapper">
-          <img class="option" id="pseudo" />
           <img
-            class="option"
+            class="card helper top"
+            src="public/images/paper/paper-png.png"
+          />
+          <img
+            class="card helper bot"
+            src="public/images/scissors/scissors-png.png"
+          />
+          <img class="card option pseudo" />
+          <img
+            class="card option"
             id="rock"
             src="public/images/rock/rock-yellow.png"
           />
         </div>
         <div id="paperWrapper">
-          <img class="option" id="pseudo" />
           <img
-            class="option"
+            class="card helper top"
+            src="public/images/scissors/scissors-png.png"
+          />
+          <img class="card helper bot" src="public/images/rock/rock-png.png" />
+          <img class="card option pseudo" />
+          <img
+            class="card option"
             id="paper"
             src="public/images/paper/paper-yellow.png"
           />
         </div>
         <div id="scissorsWrapper">
-          <img class="option" id="pseudo" />
+          <img class="card helper top" src="public/images/rock/rock-png.png" />
           <img
-            class="option"
+            class="card helper bot"
+            src="public/images/paper/paper-png.png"
+          />
+          <img class="card option pseudo" />
+          <img
+            class="card option"
             id="scissors"
             src="public/images/scissors/scissors-yellow.png"
           />
@@ -50,6 +68,8 @@
           <span id="computer">0</span>
         </div>
       </div>
-    </section>
+    </main>
+
+    <button id="help">Helper</button>
   </body>
 </html>

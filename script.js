@@ -63,7 +63,7 @@ function down(playerId, computerId) {
 
 // Update pseudo image url
 function updatePseudoImg(playerId, computerId, winnerId) {
-  const pseudo = document.querySelector(`#${playerId}Wrapper #pseudo`);
+  const pseudo = document.querySelector(`#${playerId}Wrapper .pseudo`);
   const computer = document.querySelector(`#${computerId}`);
   if (winnerId === playerId) {
     pseudo.src = computer.src.replace('yellow', 'green');
@@ -104,4 +104,13 @@ options.forEach(option => {
   option.addEventListener('click', () => {
     playRound(option.id, getComputerChoice());
   });
+});
+
+const help = document.querySelector('#help');
+help.addEventListener('click', () => {
+  const helpers = document.querySelectorAll('.helper');
+  helpers.forEach(helper => {
+    helper.classList.toggle('active');
+  });
+  help.classList.toggle('helped');
 });
